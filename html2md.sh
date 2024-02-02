@@ -1,5 +1,12 @@
 #!/bin/bash
 
+# pandoc이 설치되어 있는지 확인
+if ! command -v pandoc &> /dev/null; then
+    echo "pandoc could not be found. Please install pandoc before running this script."
+    echo "For example, on Ubuntu or Debian, you can install pandoc with: sudo apt install pandoc"
+    exit 1
+fi
+
 # markdown 디렉토리가 없으면 생성
 if [ ! -d "markdown" ]; then
   mkdir markdown
