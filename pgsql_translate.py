@@ -3,7 +3,8 @@ import os
 
 # DeepL API 키 설정
 DEEPL_API_KEY = '여기에_당신의_API_키를_입력하세요'
-DEEPL_API_URL = "https://api.deepl.com/v2/translate"
+#DEEPL_API_URL = "https://api.deepl.com/v2/translate"
+DEEPL_API_URL = "https://api-free.deepl.com/v2/translate"
 
 def translate_html(html_content, target_lang='KO'):
     """HTML 내용을 대상 언어로 번역합니다, HTML 구조는 유지됩니다."""
@@ -14,6 +15,8 @@ def translate_html(html_content, target_lang='KO'):
         'tag_handling': 'html'
     }
     response = requests.post(DEEPL_API_URL, data=data)
+#   print("Status Code:", response.status_code)  # 응답 코드 출력
+#   print("Response Body:", response.text)  # 전체 응답 내용 출력
     result = response.json()
     return result['translations'][0]['text']
 
