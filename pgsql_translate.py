@@ -49,4 +49,4 @@ def translate_directory_html_files(directory_path):
 
 if __name__ == "__main__":
     # 예시 디렉토리 내의 HTML 파일 번역 실행
-    translate_directory_html_files('example_directory')
+    translate_directory_html_files('./')
