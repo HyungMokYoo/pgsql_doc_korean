@@ -1,2 +1,4 @@
-# pgsql_16.1_doc_korean
-PostgreSQL 16.1 Documentation Translations
+# pgsql_16.x_doc_korean
+PostgreSQL 16.x Documentation Translations
+
+python3 pgsql_translate.py ./
