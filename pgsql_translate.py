@@ -1,5 +1,6 @@
 import requests
 import os
+import shutil  # 파일을 이동시키기 위해 추가
 
 # DeepL API 키 설정
 DEEPL_API_KEY = '여기에_당신의_API_키를_입력하세요'
@@ -23,9 +24,12 @@ def translate_html(html_content, target_lang='KO'):
 def translate_directory_html_files(directory_path):
     """지정된 디렉토리 내의 모든 HTML 파일을 번역합니다."""
     # 'ko' 디렉토리 생성 (존재하지 않을 경우)
-    output_directory = os.path.join(directory_path, 'ko')
-    if not os.path.exists(output_directory):
-        os.makedirs(output_directory)
+    output_directory_ko = os.path.join(directory_path, 'ko')
+    output_directory_en = os.path.join(directory_path, 'en')
+    if not os.path.exists(output_directory_ko):
+        os.makedirs(output_directory_ko)
+    if not os.path.exists(output_directory_en):
+        os.makedirs(output_directory_en)
     
     # 디렉토리 내의 모든 파일을 순회
     for filename in os.listdir(directory_path):
@@ -39,10 +43,14 @@ def translate_directory_html_files(directory_path):
             # HTML 내용 번역
             translated_html = translate_html(html_content)
             
-            # 번역된 HTML 저장
-            output_file_path = os.path.join(output_directory, filename)
-            with open(output_file_path, 'w', encoding='utf-8') as file:
+            # 번역된 HTML, 'ko' 디렉토리에 저장
+            output_file_path_ko = os.path.join(output_directory_ko, filename)
+            with open(output_file_path_ko, 'w', encoding='utf-8') as file:
                 file.write(translated_html)
+            
+            # 원본 HTML 파일을 'en' 디렉토리로 이동
+            output_file_path_en = os.path.join(output_directory_en, filename)
+            shutil.move(file_path, output_file_path_en)
 
 # 예시 디렉토리 내의 HTML 파일 번역 실행
 #translate_directory_html_files('example_directory')
